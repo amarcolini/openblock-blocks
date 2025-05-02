@@ -26,7 +26,7 @@ goog.require('Blockly.Arduino');
 Blockly.Arduino['control_wait'] = function(block) {
   var arg0 = Blockly.Arduino.valueToCode(block, 'DURATION',
       Blockly.Arduino.ORDER_UNARY_POSTFIX);
-  var code = "delay(" + arg0 + " * 1000" + ");\n";
+  var code = "unsigned long now = millis();\nwhile(millis()-now<" + arg0 + "*1000.0){\nrepeat();\n}\n";
   return code;
 };
 
@@ -38,7 +38,7 @@ Blockly.Arduino['control_repeat'] = function(block) {
 
   var code = "for (int index = 0; index < " + repeats + "; index++) {\n";
   code += branch;
-  code += "}\n";
+  code += Blockly.Arduino.INDENT + "repeat();\n}\n";
   return code;
 };
 

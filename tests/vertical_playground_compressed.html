@@ -121,6 +121,7 @@
 
       function toCode(lang) {
         var output = document.getElementById('importExport');
+        console.log("Converting to code in lang: " + lang);
         output.value = Blockly[lang].workspaceToCode(workspace);
         taChange();
       }
